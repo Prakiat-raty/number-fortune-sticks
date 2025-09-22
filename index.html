@@ -40,7 +40,7 @@
     /* --- ธูป: สั้นลง + สี่เหลี่ยม --- */
     .incense{
       position:absolute; left:50%; transform:translateX(-50%);
-      bottom:22%; width:22px; height:52%;             /* ⬅ สั้นลงจากเดิม 66% */
+      bottom:22%; width:22px; height:32%;             /* ⬅ สั้นลงจากเดิม 66% */
       display:flex; align-items:flex-start; justify-content:center;
     }
     .stick{
@@ -93,7 +93,7 @@
     .digits{
       position:absolute; inset:8px 0 8px 0; z-index:2;
       display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-      padding:22% 0;                        /* ⬅ จำกัดช่วงวางตัวเลขให้แคบลง → เลขชิดกันขึ้น */
+      padding:12% 0;                        /* ⬅ จำกัดช่วงวางตัวเลขให้แคบลง → เลขชิดกันขึ้น */
       clip-path: inset(0 0 calc(100% - var(--revealH)) 0);
       transition:clip-path .05s linear; pointer-events:none;
     }
