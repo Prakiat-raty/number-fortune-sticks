@@ -4,77 +4,124 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>ธูปเลข 3 ตัว</title>
-  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="theme-color" content="#0b0b12" />
   <link rel="manifest" href="manifest.json" />
   <style>
     :root{
-      --bg:#0b0b0f;
-      --floor:#1a1a22;
+      --bg:#0b0b12;
+      --bg2:#0a0a10;
+      --floor:#181824;
       --stick:#8b5a3c;
       --ember:#ffcc66;
       --smoke:#ffffffcc;
 
-      /* ตัวแปรตำแหน่ง/ขนาดที่คำนวณระหว่างรัน */
-      --burnYpx:0px;        /* ระดับไหม้จากบนลงล่างในแท่ง */
-      --revealH:0%;         /* ส่วนสูงที่เผยเลข */
-      --flameHpx:28px;      /* ความสูงเปลวไฟ (คำนวณใหม่ตามแท่ง) */
-      --flameWpx:20px;      /* ความกว้างเปลวไฟ (คำนวณใหม่ตามแท่ง) */
-      --coalTpx:6px;        /* ความหนาเส้นถ่าน (ขอบแดง) */
+      --burnYpx:0px;
+      --revealH:0%;
+      --flameHpx:26px;
+      --flameWpx:18px;
+      --coalTpx:6px;
     }
 
-    html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 50% 10%, #16161d 0%, var(--bg) 70%);}
+    html,body{height:100%;margin:0;background:radial-gradient(1200px 800px at 50% 10%, #191a25 0%, var(--bg) 70%);}
     body{
-      color:#eaeaf0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;
+      color:#eef0f6; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;
       display:flex; align-items:center; justify-content:center; padding:16px;
     }
-
-    .wrap{width:min(380px,92vw); display:flex; flex-direction:column; align-items:center; gap:12px;}
+    .wrap{width:min(420px,92vw); display:flex; flex-direction:column; align-items:center; gap:12px;}
     h1{font-size:1.1rem; font-weight:700; margin:0; opacity:.9}
 
     .scene{
       position:relative; width:100%; aspect-ratio:3/5;
-      border-radius:18px; background:linear-gradient(to bottom,#121219 0%,#0e0e14 50%,#0b0b0f 100%);
-      box-shadow:0 10px 40px rgba(0,0,0,.6) inset, 0 20px 50px rgba(0,0,0,.5);
+      border-radius:18px;
+      background:linear-gradient(to bottom,#11121a 0%,#10111a 40%,#0b0c13 100%);
+      box-shadow: 0 10px 40px rgba(0,0,0,.6) inset, 0 20px 50px rgba(0,0,0,.5);
       overflow:hidden;
     }
+
+    /* ——— กระถางธูปสวยงาม ——— */
+    .censer{
+      position:absolute; left:50%; transform:translateX(-50%);
+      bottom:8%;
+      width:60%; max-width:280px; aspect-ratio:7.5/3.8;
+    }
+    .censer .base{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(140% 130% at 50% -10%, #6d5f38 0%, #5a4d2d 35%, #3a3020 65%, transparent 66%),
+        linear-gradient(180deg,#5e4f2a 0%, #2a2318 100%);
+      border-radius:30px/18px;
+      box-shadow:
+        inset 0 3px 8px rgba(255,255,255,.18),
+        inset 0 -8px 16px rgba(0,0,0,.5),
+        0 12px 28px rgba(0,0,0,.55);
+    }
+    .censer .rim{
+      position:absolute; left:5%; right:5%; top:-10%;
+      height:22%;
+      background:linear-gradient(180deg,#a68d48 0%, #7d683a 55%, #4e4022 100%);
+      border-radius:22px/14px;
+      box-shadow: inset 0 2px 6px rgba(255,255,255,.25), inset 0 -4px 8px rgba(0,0,0,.45);
+    }
+    .censer .shine{
+      position:absolute; left:10%; right:10%; top:14%;
+      height:24%;
+      background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.14) 40%, rgba(255,255,255,.02) 60%, transparent 100%);
+      border-radius:16px;
+      mix-blend-mode:screen; opacity:.8;
+    }
+    .censer .legs{
+      position:absolute; left:14%; right:14%; bottom:-16%;
+      height:34%;
+    }
+    .leg{
+      position:absolute; width:18%; height:100%; bottom:0;
+      background:linear-gradient(180deg,#6b5b33 0%, #3d321f 100%);
+      border-radius:8px;
+      box-shadow: inset 0 2px 6px rgba(255,255,255,.18), inset 0 -4px 8px rgba(0,0,0,.5);
+    }
+    .leg.left{ left:0 }
+    .leg.mid{ left:41% }
+    .leg.right{ right:0 }
+
+    /* พื้น */
     .floor{
-      position:absolute; left:0; right:0; bottom:0; height:24%;
-      background:radial-gradient(60% 100% at 50% 0%, #23232c 0%, var(--floor) 45%, #101018 100%);
-      filter:blur(0.3px);
+      position:absolute; left:0; right:0; bottom:0; height:26%;
+      background:
+        radial-gradient(80% 110% at 50% 0%, #23243a 0%, var(--floor) 46%, #0f1018 100%);
+      filter: blur(.3px);
     }
 
-    /* ธูป: กว้างขึ้น + สั้นลง 32% (ตามที่สั่ง) + สี่เหลี่ยม */
+    /* ——— ธูป: กว้างขึ้น + สั้น 32% ——— */
     .incense{
       position:absolute; left:50%; transform:translateX(-50%);
-      bottom:22%; width:28px; height:32%;
+      bottom:calc(8% + 26% - 6%); /* ยืนในกระถางนิดหน่อย */
+      width:32px; height:32%;
       display:flex; align-items:flex-start; justify-content:center;
     }
     .stick{
       position:relative; width:100%; height:100%;
-      background:linear-gradient(180deg,#9a6a46 0%, var(--stick) 65%, #6f452d 100%);
+      background:linear-gradient(180deg,#ab7850 0%, var(--stick) 60%, #6f452d 100%);
       border-radius:3px;
       box-shadow:inset 0 0 0 1px #6e4732, inset 0 -6px 14px rgba(0,0,0,.35);
       overflow:hidden;
     }
 
-    /* ส่วนที่ไหม้ (เถ้า) จากบนลงล่าง */
+    /* ส่วนไหม้/เส้นถ่าน */
     .burned{
       position:absolute; left:0; top:0; width:100%; height:var(--burnYpx);
-      background:repeating-linear-gradient(180deg,#cfc8bd 0 6px,#bdb6ab 6px 12px);
+      background:repeating-linear-gradient(180deg,#d9d3c8 0 6px,#c7c0b5 6px 12px);
       box-shadow:inset 0 -6px 10px rgba(0,0,0,.35);
       transition:height .05s linear;
     }
-
-    /* เส้นถ่านแดง เกาะขอบเถ้าพอดี */
     .coalLine{
       position:absolute; left:-2px; width:calc(100% + 4px); height:var(--coalTpx);
-      top:calc(var(--burnYpx) - (var(--coalTpx) / 2));
+      top:calc(var(--burnYpx) - (var(--coalTpx)/2));
       background:radial-gradient(16px var(--coalTpx) at 50% 50%, var(--ember) 0%, #ff914d 60%, rgba(255,0,0,.25) 100%);
-      filter:blur(0.5px) brightness(1.05);
+      filter: blur(.5px) brightness(1.05);
       mix-blend-mode:screen; pointer-events:none;
     }
 
-    /* เปลวไฟ: ขนาด/ตำแหน่งอิงตัวแปรที่คำนวณจากขนาดแท่ง */
+    /* เปลวไฟ/ควัน ผูกตำแหน่งกับระดับไหม้ */
     .flame{
       position:absolute; left:50%; transform:translate(-50%,0);
       width:var(--flameWpx); height:var(--flameHpx);
@@ -86,38 +133,31 @@
       width:100%; height:100%;
       border-radius:50% 50% 80% 80%/60% 60% 40% 40%;
       background:radial-gradient(ellipse at 50% 65%, #fff7c2 0%, #ffd36e 30%, #ff9a3d 60%, transparent 70%);
-      animation:flicker .12s infinite alternate ease-in-out;
-      filter:blur(0.4px);
+      animation:flicker .12s infinite alternate ease-in-out; filter:blur(.4px);
     }
-    .flame::after{width:78%; height:78%; opacity:.8; filter:blur(0.8px) brightness(1.1); animation-duration:.13s;}
-    @keyframes flicker{from{transform:translate(-50%,-50%) scale(.95) rotate(-2deg)}to{transform:translate(-50%,-50%) scale(1.05) rotate(2deg)}}
+    .flame::after{width:78%; height:78%; opacity:.85; filter:blur(.8px) brightness(1.1); animation-duration:.13s;}
+    @keyframes flicker{from{transform:translate(-50%,-50%) scale(.94) rotate(-2deg)}to{transform:translate(-50%,-50%) scale(1.04) rotate(2deg)}}
 
-    /* ควัน: ให้อิงใกล้ปลายไฟ */
     .smoke{
       position:absolute; left:50%; transform:translateX(-50%);
-      width:8px; height:8px;
-      top:calc(var(--burnYpx) - (var(--flameHpx) * 0.35));
+      width:8px; height:8px; top:calc(var(--burnYpx) - (var(--flameHpx)*0.35));
       pointer-events:none;
     }
     .puff{
       position:absolute; left:50%; top:50%; width:10px; height:10px; border-radius:50%;
       background:radial-gradient(circle at 50% 50%, var(--smoke) 0%, transparent 60%);
-      animation:rise 3.6s linear infinite; opacity:0; filter:blur(1.2px);
+      animation:rise 3.4s linear infinite; opacity:0; filter:blur(1.2px);
     }
     .puff:nth-child(2){animation-delay:.8s}
     .puff:nth-child(3){animation-delay:1.6s}
     .puff:nth-child(4){animation-delay:2.4s}
-    @keyframes rise{
-      0%{transform:translate(-50%,-8px) scale(.6); opacity:0}
-      10%{opacity:.35}
-      100%{transform:translate(calc(-50% - 26px), -140px) scale(1.8); opacity:0}
-    }
+    @keyframes rise{0%{transform:translate(-50%,-6px) scale(.6); opacity:0}10%{opacity:.35}100%{transform:translate(calc(-50% - 26px), -140px) scale(1.8); opacity:0}}
 
-    /* ตัวเลข: padding 12% ให้ชิดกันตามที่สั่ง */
+    /* ——— ตัวเลข: ยกตัวล่างขึ้น (padding 12% ด้านบน + 26% ด้านล่าง) ——— */
     .digits{
       position:absolute; inset:8px 0 8px 0; z-index:2;
       display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-      padding:12% 0;
+      padding-top:12%; padding-bottom:26%;
       clip-path: inset(0 0 calc(100% - var(--revealH)) 0);
       transition:clip-path .05s linear; pointer-events:none;
     }
@@ -133,24 +173,56 @@
 
     .controls{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
     button{
-      cursor:pointer; background:#2a2a35; color:#fff; border:1px solid #3a3a46;
+      cursor:pointer; background:linear-gradient(180deg,#2e2e3a 0%, #232331 100%);
+      color:#fff; border:1px solid #3a3a46;
       padding:10px 14px; border-radius:12px; font-weight:700; font-size:.98rem;
       box-shadow:0 6px 18px rgba(0,0,0,.35);
     }
     button:disabled{opacity:.55; cursor:not-allowed}
     .hint{font-size:.9rem; opacity:.75; text-align:center}
+
+    /* ——— Modal สั่งซื้อธูป ——— */
+    .modal{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.5); backdrop-filter: blur(4px); z-index:50;
+    }
+    .modal.show{ display:flex; }
+    .card{
+      width:min(360px, 92vw);
+      background:linear-gradient(180deg,#1b1b28 0%, #151522 100%);
+      border:1px solid #2a2a3a; border-radius:16px; padding:18px;
+      box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .card h2{margin:0 0 8px 0; font-size:1.05rem}
+    .card p{margin:4px 0 14px 0; opacity:.85}
+    .card .actions{display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap}
+    .btn-primary{background:linear-gradient(180deg,#6d86ff 0%, #425aff 100%); border-color:#4b5cff}
+    .btn-secondary{background:linear-gradient(180deg,#343445 0%, #2a2a3a 100%); border-color:#3a3a46}
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>จุดธูปเลข 3 ตัว</h1>
+
     <div class="scene">
+      <!-- กระถาง -->
+      <div class="censer">
+        <div class="rim"></div>
+        <div class="base"></div>
+        <div class="shine"></div>
+        <div class="legs">
+          <div class="leg left"></div>
+          <div class="leg mid"></div>
+          <div class="leg right"></div>
+        </div>
+      </div>
+
+      <!-- ธูป -->
       <div class="incense">
         <div class="stick" id="stick">
           <div class="burned" id="burned"></div>
           <div class="coalLine" id="coal"></div>
 
-          <!-- เปลวไฟ/ควันวาง “ภายในแท่ง” เพื่ออ้างตำแหน่งจากตัวแท่ง -->
           <div class="flame" id="flame" hidden></div>
           <div class="smoke" id="smoke" hidden>
             <div class="puff"></div><div class="puff"></div><div class="puff"></div><div class="puff"></div>
@@ -163,6 +235,7 @@
           </div>
         </div>
       </div>
+
       <div class="floor"></div>
     </div>
 
@@ -173,6 +246,18 @@
     <div class="hint">กำหนดเลขผ่าน URL เช่น <code>?num=538</code> (ไม่ระบุ = สุ่ม)</div>
   </div>
 
+  <!-- Modal สั่งซื้อธูป -->
+  <div class="modal" id="buyModal" aria-modal="true" role="dialog">
+    <div class="card">
+      <h2>ธูปหมดแล้ว</h2>
+      <p>อยากต่ออายุพิธีอีกนิดไหม? เลือกสั่งซื้อชุดธูปของแท้คุณภาพดีได้เลย</p>
+      <div class="actions">
+        <button class="btn-secondary" id="buyLaterBtn">ไว้ก่อน</button>
+        <button class="btn-primary" id="buyNowBtn">สั่งซื้อธูป</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ===== ตั้งเลขเป้าหมาย =====
     function getTargetNumber(){
@@ -181,7 +266,7 @@
       return s.length===3 ? s : String(Math.floor(100+Math.random()*900));
     }
 
-    // ===== อ้างอิง DOM =====
+    // ===== DOM =====
     const stick = document.getElementById('stick');
     const digitsEl = document.getElementById('digits');
     const burned = document.getElementById('burned');
@@ -192,39 +277,36 @@
     const resetBtn = document.getElementById('resetBtn');
     const d1 = document.getElementById('d1'), d2 = document.getElementById('d2'), d3 = document.getElementById('d3');
 
-    // ===== สุ่ม/ตั้งเลข =====
+    const buyModal = document.getElementById('buyModal');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const buyLaterBtn = document.getElementById('buyLaterBtn');
+
+    // ===== เลขเริ่มต้น =====
     let num = getTargetNumber();
     [d1.textContent, d2.textContent, d3.textContent] = num.split('');
 
-    // ===== ตัวแปรวิ่ง =====
+    // ===== สถานะแอนิเมชัน =====
     let startTime = null, rafId = null, running = false;
 
-    // ระยะเวลาไหม้ทั้งหมด (มิลลิวินาที) ปรับได้
+    // เวลาไหม้ทั้งหมด (ms)
     const BURN_DURATION = 60_000;
 
-    // คำนวณ “ขนาดเปลวไฟ” และ “ความหนาเส้นถ่าน” ให้สัมพันธ์กับแท่งธูป
     function setDynamicSizes(){
       const r = stick.getBoundingClientRect();
-      const w = r.width, h = r.height;
-
-      // เปลวไฟสูงประมาณ 0.9*ความกว้างแท่ง (ดูพอดีเมื่อแท่งสั้นลง)
-      const flameH = Math.max(18, Math.min(34, w * 0.9));
-      const flameW = Math.max(14, Math.min(28, w * 0.65));
-
-      // เส้นถ่านบางตามสเกล
-      const coalT = Math.max(4, Math.min(8, Math.round(w * 0.22)));
-
+      const w = r.width;
+      // สเกลไฟ/เส้นถ่านตามความกว้างแท่ง
+      const flameH = Math.max(18, Math.min(30, w * 0.85));
+      const flameW = Math.max(14, Math.min(26, w * 0.6));
+      const coalT  = Math.max(4, Math.min(8,  Math.round(w * 0.22)));
       document.documentElement.style.setProperty('--flameHpx', flameH + 'px');
       document.documentElement.style.setProperty('--flameWpx', flameW + 'px');
       document.documentElement.style.setProperty('--coalTpx',  coalT + 'px');
     }
 
     function layoutVars(progress){
-      // progress: 0..1 ของความสูงแท่ง
       const H = stick.getBoundingClientRect().height;
       const burnYpx = Math.min(H - 2, Math.max(0, H * progress));
       const revealH = Math.max(0, (burnYpx - 6) / H * 100);
-
       document.documentElement.style.setProperty('--burnYpx', burnYpx + 'px');
       document.documentElement.style.setProperty('--revealH', revealH + '%');
     }
@@ -232,19 +314,20 @@
     function step(ts){
       if (!startTime) startTime = ts;
       const t = Math.min(1, (ts - startTime) / BURN_DURATION);
-
       layoutVars(t);
-      flame.hidden = smoke.hidden = !(t > 0 && t < 1);
 
-      // อัปเดตความสูงเถ้าเพื่อให้ transition ลื่น
+      flame.hidden = smoke.hidden = !(t > 0 && t < 1);
       burned.style.height = getComputedStyle(document.documentElement).getPropertyValue('--burnYpx');
 
       if (t < 1){
         rafId = requestAnimationFrame(step);
-      }else{
+      } else {
         running = false;
         igniteBtn.disabled = true;
         resetBtn.disabled = false;
+
+        // 🎯 ธูปหมดแล้ว -> เปิดโมดัล "สั่งซื้อธูป"
+        buyModal.classList.add('show');
       }
     }
 
@@ -261,36 +344,39 @@
       cancelAnimationFrame(rafId);
       running = false;
       startTime = null;
-
       layoutVars(0);
       burned.style.height = '0px';
-      // ห้ามตั้งค่า top ของ coal ด้วย JS ปล่อยให้ CSS calc คุมเอง
       flame.hidden = true;
       smoke.hidden = true;
-
       num = getTargetNumber();
       [d1.textContent, d2.textContent, d3.textContent] = num.split('');
-
       igniteBtn.disabled = false;
       resetBtn.disabled = true;
+      buyModal.classList.remove('show');
     }
 
-    // เริ่มต้น: คำนวณสเกล + เซ็ตตำแหน่ง
     function onResize(){
       setDynamicSizes();
-      // รีคอมพิวต์ layout ที่ progress=ปัจจุบัน (หรือ 0 หากยังไม่เริ่ม)
       const cur = startTime ? Math.min(1, (performance.now() - startTime) / BURN_DURATION) : 0;
       layoutVars(cur);
     }
 
     window.addEventListener('resize', onResize);
-    onResize();            // คำนวณครั้งแรก
-    layoutVars(0);         // ปลายไฟเกาะหัวแท่งทันทีตั้งแต่ก่อนจุด
+    onResize();
+    layoutVars(0);
 
     igniteBtn.addEventListener('click', ignite);
     resetBtn.addEventListener('click', resetAll);
 
-    // Service Worker (ถ้ามี)
+    // ปุ่มโมดัล
+    buyLaterBtn.addEventListener('click', ()=> buyModal.classList.remove('show'));
+    buyNowBtn.addEventListener('click', ()=>{
+      // ใส่ลิงก์ร้าน/เพย์เมนต์ของคุณตรงนี้ (ตัวอย่างใช้ placeholder)
+      // ตัวอย่าง: ไปหน้า Line OA / FB Shop / PromptPay Link / เว็บชำระเงิน
+      window.open('https://your-shop.example.com/incense', '_blank');
+    });
+
+    // Service Worker
     if ('serviceWorker' in navigator){
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(()=>{});
