@@ -1,7 +1,7 @@
 {
   "name": "ธูปเลข 3 ตัว",
   "short_name": "ธูปเลข",
-  "description": "จุดธูปดอกเดียว เลข 3 ตัวค่อยๆ โผล่จากบนลงล่าง",
+  "description": "จุดธูปดอกเดียว เสี่ยงโชค",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -14,3 +14,4 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
     ]
 }
+
