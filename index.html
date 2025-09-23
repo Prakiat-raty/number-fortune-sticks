@@ -264,4 +264,116 @@
       // เหมาะกับการค้า เงินคล่อง มีเสน่ห์
       ['936','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['639','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['369','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],
       // ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์
-      ['659','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['956','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['565','ใจเย็น]()
+      ['659','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['956','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['565','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],
+      // ค้าขายดี ร่ำรวย ได้ดีเพราะปาก
+      ['624','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['246','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['462','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],
+      // สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน
+      ['154','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['145','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['514','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],
+      // ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ
+      ['159','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['195','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['519','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ']
+    ]);
+
+    const FALLBACKS = [
+      'เป็นเลขมงคล หนุนโชคลาภ การงานราบรื่น',
+      'รับพลังบวก โอกาสใหม่ ๆ เข้ามา เงินทองไหลมาเทมา',
+      'แคล้วคลาดปลอดภัย โชคดีตลอดวัน',
+      'เจรจาราบรื่น ผู้ใหญ่เมตตา การเงินเจริญงอกงาม',
+      'เสริมเสน่ห์ เมตตามหานิยม ค้าขายคล่อง'
+    ];
+
+    function meaningFor(num){
+      return MEANINGS.get(num) || FALLBACKS[Math.floor(Math.random()*FALLBACKS.length)];
+    }
+
+    /* ----------------- ธูปและแอนิเมชัน ----------------- */
+    const stick = document.getElementById('stick');
+    const digitsEl = document.getElementById('digits');
+    const burned = document.getElementById('burned');
+    const coal = document.getElementById('coal');
+    const flame = document.getElementById('flame');
+    const smoke = document.getElementById('smoke');
+    const igniteBtn = document.getElementById('igniteBtn');
+    const mText = document.getElementById('meaningText');
+
+    const d1 = document.getElementById('d1'), d2 = document.getElementById('d2'), d3 = document.getElementById('d3');
+
+    let num = getTargetNumber();
+    [d1.textContent, d2.textContent, d3.textContent] = num.split('');
+
+    let startTime = null, rafId = null, running = false;
+    const BURN_DURATION = 60_000; // 60 วินาที
+
+    function setDynamicSizes(){
+      const r = stick.getBoundingClientRect();
+      const w = r.width;
+      const flameH = Math.max(18, Math.min(30, w * 0.85));
+      const flameW = Math.max(14, Math.min(26, w * 0.6));
+      const coalT  = Math.max(4, Math.min(8,  Math.round(w * 0.22)));
+      document.documentElement.style.setProperty('--flameHpx', flameH + 'px');
+      document.documentElement.style.setProperty('--flameWpx', flameW + 'px');
+      document.documentElement.style.setProperty('--coalTpx',  coalT + 'px');
+    }
+
+    function layoutVars(progress){
+      const H = stick.getBoundingClientRect().height;
+      const burnYpx = Math.min(H - 2, Math.max(0, H * progress));
+      const revealH = Math.max(0, (burnYpx - 6) / H * 100);
+      document.documentElement.style.setProperty('--burnYpx', burnYpx + 'px');
+      document.documentElement.style.setProperty('--revealH', revealH + '%');
+    }
+
+    function step(ts){
+      if (!startTime) startTime = ts;
+      const t = Math.min(1, (ts - startTime) / BURN_DURATION);
+
+      layoutVars(t);
+      flame.hidden = smoke.hidden = !(t > 0 && t < 1);
+      burned.style.height = getComputedStyle(document.documentElement).getPropertyValue('--burnYpx');
+
+      if (t < 1){
+        rafId = requestAnimationFrame(step);
+      } else {
+        running = false;
+        igniteBtn.disabled = false;
+        igniteBtn.textContent = 'จุดใหม่อีกครั้ง';
+        // แสดงความหมาย
+        const txt = meaningFor(num);
+        mText.textContent = `${num} → ${txt}`;
+      }
+    }
+
+    function ignite(){
+      if (running) return;
+      running = true;
+      igniteBtn.disabled = true;
+      igniteBtn.textContent = 'กำลังจุด...';
+      startTime = null;
+      // รีเซ็ตสภาพ
+      mText.innerHTML = '<span class="muted">..............................................................</span>';
+      burned.style.height = '0px'; flame.hidden = true; smoke.hidden = true;
+      // สุ่มเลขใหม่หากไม่ได้ล็อกผ่าน URL
+      const url = new URL(location.href);
+      if (!url.searchParams.get('num')) {
+        num = getTargetNumber();
+        [d1.textContent, d2.textContent, d3.textContent] = num.split('');
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    function onResize(){
+      setDynamicSizes();
+      const cur = startTime ? Math.min(1, (performance.now() - startTime) / BURN_DURATION) : 0;
+      layoutVars(cur);
+    }
+    window.addEventListener('resize', onResize);
+    onResize(); layoutVars(0);
+
+    igniteBtn.addEventListener('click', ignite);
+
+    // Service Worker (PWA)
+    if ('serviceWorker' in navigator){
+      window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+    }
+  </script>
+</body>
+</html>
