@@ -8,205 +8,114 @@
   <link rel="manifest" href="manifest.json" />
   <style>
     :root{
-      /* โทนตามตัวอย่าง */
-      --blue-1:#0e3e8c;   /* header / ขอบ */
-      --blue-2:#1e5cc7;   /* ปุ่ม */
-      --blue-3:#0a2f6a;   /* เฉดเข้ม */
-      --ink:#0b0b12;
-      --paper:#ffffff;
-      --muted:#5f6b7c;
-
-      /* ธูป + แอนิเมชัน */
-      --stick:#8b5a3c;
-      --ember:#ffcc66;
-      --smoke:#ffffffcc;
-      --burnYpx:0px;
-      --revealH:0%;
-      --flameHpx:26px;
-      --flameWpx:18px;
-      --coalTpx:6px;
+      --blue-1:#0e3e8c; --blue-2:#1e5cc7; --ink:#0b0b12; --paper:#ffffff; --muted:#5f6b7c;
+      --stick:#8b5a3c; --ember:#ffcc66; --smoke:#ffffffcc;
+      --burnYpx:0px; --revealH:0%; --flameHpx:26px; --flameWpx:18px; --coalTpx:6px;
     }
-
     html,body{height:100%; margin:0; background:#f4f7fb; color:#10213a;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;}
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;}
 
-    /* กรอบนอกเหมือนโปสเตอร์ตัวอย่าง */
-    .page{
-      max-width:520px; margin:16px auto; background:var(--paper);
-      border:6px solid var(--blue-1); border-radius:10px; box-shadow:0 6px 28px rgba(0,0,0,.08);
-      overflow:hidden;
-    }
-
-    /* แถบหัว */
-    .header{
-      background:linear-gradient(180deg,#1a56b5 0%, #114596 100%);
-      color:#fff; text-align:center; padding:14px 12px;
-      border-bottom:6px solid #e8eef8;
-    }
+    .page{max-width:520px; margin:16px auto; background:var(--paper);
+      border:6px solid var(--blue-1); border-radius:10px; box-shadow:0 6px 28px rgba(0,0,0,.08); overflow:hidden;}
+    .header{background:linear-gradient(180deg,#1a56b5 0%, #114596 100%); color:#fff; text-align:center; padding:14px 12px; border-bottom:6px solid #e8eef8;}
     .header h1{margin:0; font-weight:800; letter-spacing:.5px; font-size:1.24rem}
-
-    /* เนื้อหา */
     .content{ padding:18px 18px 22px 18px; }
 
-    /* เวทีโชว์ (กระถาง+ธูป) */
-    .stage{
-      position:relative; width:100%; aspect-ratio: 3/3.6;
-      background:linear-gradient(180deg,#f7faff 0%, #eef3fb 60%, #e7edf8 100%);
-      border:2px solid #cfdcf5; border-radius:10px;
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
-    }
+    .stage{position:relative; width:100%; aspect-ratio: 3/3.6; background:linear-gradient(180deg,#f7faff 0%, #eef3fb 60%, #e7edf8 100%);
+      border:2px solid #cfdcf5; border-radius:10px; display:flex; align-items:center; justify-content:center; overflow:hidden;}
 
-    /* ---------- กระถางลายมังกรโทนฟ้า ---------- */
-    .censer{
-      position:absolute; left:50%; transform:translateX(-50%);
-      bottom:10%; width:min(300px,80%); aspect-ratio: 7.5/5.2;
-      filter: drop-shadow(0 10px 16px rgba(20,60,120,.18));
-    }
-    .pot{
-      position:absolute; inset:0; border-radius: 20px 20px 26px 26px / 16px 16px 24px 24px;
-      background:
-        /* ลายมังกรแบบกราฟิกง่าย ๆ */
-        radial-gradient(220px 120px at 50% 60%, rgba(255,255,255,.24) 0 25%, transparent 26%) no-repeat center/70% 85%,
-        /* เฉดผิวกระถาง */
-        linear-gradient(180deg,#2d6fd6 0%, #0f4baa 55%, #0a3a86 100%);
-      border:3px solid #08356f;
-      box-shadow: inset 0 6px 10px rgba(255,255,255,.28),
-                  inset 0 -10px 18px rgba(0,0,0,.25);
-    }
-    /* ปากกระถางสีขาว */
-    .rim{
-      position:absolute; left:6%; right:6%; top:-5%; height:20%;
-      background:linear-gradient(180deg,#ffffff 0%, #f1f4fb 60%, #dbe3f6 100%);
-      border:3px solid #264f97; border-radius: 26px/16px;
-      box-shadow: inset 0 6px 10px rgba(0,0,0,.06);
-    }
-    .hole{
-      position:absolute; left:10%; right:10%; top:1.5%; height:34%;
-      background: radial-gradient(70% 90% at 50% 40%, #000 0%, #2b2b2b 40%, #111 100%);
-      border-radius:20px/12px; filter: blur(.2px);
-    }
-    /* ขา */
+    /* กระถาง */
+    .censer{position:absolute; left:50%; transform:translateX(-50%); bottom:10%; width:min(300px,80%); aspect-ratio: 7.5/5.2;
+      filter:drop-shadow(0 10px 16px rgba(20,60,120,.18));}
+    .pot{position:absolute; inset:0; border-radius: 20px 20px 26px 26px / 16px 16px 24px 24px;
+      background:radial-gradient(220px 120px at 50% 60%, rgba(255,255,255,.24) 0 25%, transparent 26%) no-repeat center/70% 85%,
+      linear-gradient(180deg,#2d6fd6 0%, #0f4baa 55%, #0a3a86 100%);
+      border:3px solid #08356f; box-shadow: inset 0 6px 10px rgba(255,255,255,.28), inset 0 -10px 18px rgba(0,0,0,.25);}
+    .rim{position:absolute; left:6%; right:6%; top:-5%; height:20%; background:linear-gradient(180deg,#ffffff 0%, #f1f4fb 60%, #dbe3f6 100%);
+      border:3px solid #264f97; border-radius:26px/16px; box-shadow: inset 0 6px 10px rgba(0,0,0,.06);}
+    .hole{position:absolute; left:10%; right:10%; top:1.5%; height:34%; background: radial-gradient(70% 90% at 50% 40%, #000 0%, #2b2b2b 40%, #111 100%);
+      border-radius:20px/12px; filter: blur(.2px);}
     .legs{ position:absolute; left:14%; right:14%; bottom:-10%; height:28%; }
-    .leg{
-      position:absolute; width:18%; height:100%; bottom:0; border-radius:10px;
-      background:linear-gradient(180deg,#1c4fa2 0%, #0e397e 100%);
-      border:2px solid #08356f; box-shadow:inset 0 4px 8px rgba(255,255,255,.2), inset 0 -6px 10px rgba(0,0,0,.25);
-    }
-    .leg.left{ left:0 } .leg.mid{ left:41% } .leg.right{ right:0 }
+    .leg{position:absolute; width:18%; height:100%; bottom:0; border-radius:10px;
+      background:linear-gradient(180deg,#1c4fa2 0%, #0e397e 100%); border:2px solid #08356f;
+      box-shadow:inset 0 4px 8px rgba(255,255,255,.2), inset 0 -6px 10px rgba(0,0,0,.25);}
+    .leg.left{left:0}.leg.mid{left:41%}.leg.right{right:0}
 
-    /* ---------- ธูป ---------- */
-    .incense{
-      position:absolute; left:50%; transform:translateX(-50%);
-      bottom:calc(10% + 12%); /* แทงลงปากกระถาง */
-      width:34px; height:32%;
-      display:flex; align-items:flex-start; justify-content:center;
-    }
-    .stick{
-      position:relative; width:100%; height:100%;
-      background:linear-gradient(180deg,#b88357 0%, var(--stick) 60%, #6f452d 100%);
-      border-radius:3px;
-      box-shadow:inset 0 0 0 1px #6e4732, inset 0 -6px 14px rgba(0,0,0,.35);
-      overflow:hidden;
-    }
-    .burned{
-      position:absolute; left:0; top:0; width:100%; height:var(--burnYpx);
-      background:repeating-linear-gradient(180deg,#dcd6c9 0 6px,#c9c2b7 6px 12px);
-      box-shadow:inset 0 -6px 10px rgba(0,0,0,.35);
-      transition:height .05s linear;
-    }
-    .coalLine{
-      position:absolute; left:-2px; width:calc(100% + 4px); height:var(--coalTpx);
-      top:calc(var(--burnYpx) - (var(--coalTpx)/2));
-      background:radial-gradient(16px var(--coalTpx) at 50% 50%, var(--ember) 0%, #ff914d 60%, rgba(255,0,0,.25) 100%);
-      filter: blur(.5px) brightness(1.05);
-      mix-blend-mode:screen; pointer-events:none;
-    }
-    .flame{
-      position:absolute; left:50%; transform:translate(-50%,0);
-      width:var(--flameWpx); height:var(--flameHpx);
-      top:calc(var(--burnYpx) - var(--flameHpx)); pointer-events:none;
-    }
-    .flame::before,.flame::after{
-      content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-      width:100%; height:100%;
-      border-radius:50% 50% 80% 80%/60% 60% 40% 40%;
+    /* ธูป */
+    .incense{position:absolute; left:50%; transform:translateX(-50%); bottom:calc(10% + 12%); width:34px; height:32%;
+      display:flex; align-items:flex-start; justify-content:center;}
+    .stick{position:relative; width:100%; height:100%; background:linear-gradient(180deg,#b88357 0%, var(--stick) 60%, #6f452d 100%);
+      border-radius:3px; box-shadow:inset 0 0 0 1px #6e4732, inset 0 -6px 14px rgba(0,0,0,.35); overflow:hidden;}
+    .burned{position:absolute; left:0; top:0; width:100%; height:var(--burnYpx); background:repeating-linear-gradient(180deg,#dcd6c9 0 6px,#c9c2b7 6px 12px);
+      box-shadow:inset 0 -6px 10px rgba(0,0,0,.35); transition:height .05s linear;}
+    .coalLine{position:absolute; left:-2px; width:calc(100% + 4px); height:var(--coalTpx);
+      top:calc(var(--burnYpx) - (var(--coalTpx)/2)); background:radial-gradient(16px var(--coalTpx) at 50% 50%, var(--ember) 0%, #ff914d 60%, rgba(255,0,0,.25) 100%);
+      filter: blur(.5px) brightness(1.05); mix-blend-mode:screen; pointer-events:none;}
+    .flame{position:absolute; left:50%; transform:translate(-50%,0); width:var(--flameWpx); height:var(--flameHpx);
+      top:calc(var(--burnYpx) - var(--flameHpx)); pointer-events:none;}
+    .flame::before,.flame::after{content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:100%; height:100%; border-radius:50% 50% 80% 80%/60% 60% 40% 40%;
       background:radial-gradient(ellipse at 50% 65%, #fff7c2 0%, #ffd36e 30%, #ff9a3d 60%, transparent 70%);
-      animation:flicker .12s infinite alternate ease-in-out; filter:blur(.4px);
-    }
+      animation:flicker .12s infinite alternate ease-in-out; filter:blur(.4px);}
     .flame::after{width:78%; height:78%; opacity:.85; filter:blur(.8px) brightness(1.1); animation-duration:.13s;}
     @keyframes flicker{from{transform:translate(-50%,-50%) scale(.94) rotate(-2deg)}to{transform:translate(-50%,-50%) scale(1.04) rotate(2deg)}}
-    .smoke{
-      position:absolute; left:50%; transform:translateX(-50%);
-      width:8px; height:8px; top:calc(var(--burnYpx) - (var(--flameHpx)*0.35)); pointer-events:none;
-    }
-    .puff{
-      position:absolute; left:50%; top:50%; width:10px; height:10px; border-radius:50%;
-      background:radial-gradient(circle at 50% 50%, var(--smoke) 0%, transparent 60%);
-      animation:rise 3.3s linear infinite; opacity:0; filter:blur(1.2px);
-    }
-    .puff:nth-child(2){animation-delay:.8s}
-    .puff:nth-child(3){animation-delay:1.6s}
-    .puff:nth-child(4){animation-delay:2.4s}
+    .smoke{position:absolute; left:50%; transform:translateX(-50%); width:8px; height:8px; top:calc(var(--burnYpx) - (var(--flameHpx)*0.35)); pointer-events:none;}
+    .puff{position:absolute; left:50%; top:50%; width:10px; height:10px; border-radius:50%;
+      background:radial-gradient(circle at 50% 50%, var(--smoke) 0%, transparent 60%); animation:rise 3.3s linear infinite; opacity:0; filter:blur(1.2px);}
+    .puff:nth-child(2){animation-delay:.8s}.puff:nth-child(3){animation-delay:1.6s}.puff:nth-child(4){animation-delay:2.4s}
     @keyframes rise{0%{transform:translate(-50%,-6px) scale(.6); opacity:0}10%{opacity:.35}100%{transform:translate(calc(-50% - 24px), -130px) scale(1.8); opacity:0}}
 
-    /* ตัวเลข: padding บน 12% + ล่าง 22% → ตัวล่างไม่ชนก้น */
-    .digits{
-      position:absolute; inset:8px 0 8px 0; z-index:2;
-      display:flex; flex-direction:column; align-items:center; justify-content:space-between;
-      padding-top:12%; padding-bottom:22%;
-      clip-path: inset(0 0 calc(100% - var(--revealH)) 0);
-      transition:clip-path .05s linear; pointer-events:none;
-    }
-    .digit{
-      font-weight:900; letter-spacing:.02em;
-      text-shadow:0 1px 0 #5d3d2a, 0 2px 4px rgba(0,0,0,.35);
-      background:linear-gradient(180deg,#ffe9b9 0%, #f7d88c 40%, #d4a85f 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      filter:drop-shadow(0 0 .5px #2b1b12);
-      font-size:clamp(28px, 7vw, 36px);
-      line-height:1;
-    }
+    /* ตัวเลข: ยกตัวล่าง */
+    .digits{position:absolute; inset:8px 0 8px 0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+      padding-top:12%; padding-bottom:22%; clip-path: inset(0 0 calc(100% - var(--revealH)) 0); transition:clip-path .05s linear; pointer-events:none;}
+    .digit{font-weight:900; letter-spacing:.02em; text-shadow:0 1px 0 #5d3d2a, 0 2px 4px rgba(0,0,0,.35);
+      background:linear-gradient(180deg,#ffe9b9 0%, #f7d88c 40%, #d4a85f 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter:drop-shadow(0 0 .5px #2b1b12); font-size:clamp(28px, 7vw, 36px); line-height:1;}
 
-    /* ปุ่มเริ่ม */
-    .controls{display:flex; justify-content:center; margin:16px 0 10px}
-    .btn{
-      appearance:none; border:none; cursor:pointer;
-      background:linear-gradient(180deg,#3b74df 0%, #2a5ec5 100%);
-      color:#fff; padding:10px 18px; font-weight:800; font-size:1rem;
-      border-radius:10px; border:2px solid #183f89; letter-spacing:.5px;
-      box-shadow:0 6px 14px rgba(30,80,170,.25);
-    }
+    /* ปุ่ม + แถบเครดิต */
+    .topbar{display:flex; justify-content:space-between; align-items:center; margin:14px 0 6px}
+    .credit{font-weight:800; color:#0a2f6a}
+    .controls{display:flex; gap:10px; justify-content:center; margin:12px 0 10px}
+    .btn{appearance:none; border:none; cursor:pointer; background:linear-gradient(180deg,#3b74df 0%, #2a5ec5 100%);
+      color:#fff; padding:10px 18px; font-weight:800; font-size:1rem; border-radius:10px; border:2px solid #183f89; letter-spacing:.5px; box-shadow:0 6px 14px rgba(30,80,170,.25);}
     .btn:disabled{opacity:.6; cursor:not-allowed}
+    .btn-ghost{background:linear-gradient(180deg,#f2f5fc 0%, #e8eefb 100%); color:#0a2f6a; border-color:#bcd0f5}
 
-    /* กล่องโชคความหมาย */
-    .meaning{
-      margin-top:6px; border-top:2px dashed #bfcde9; padding-top:10px;
-      font-size:.98rem; color:#10213a;
-    }
+    .meaning{margin-top:6px; border-top:2px dashed #bfcde9; padding-top:10px; font-size:.98rem; color:#10213a;}
     .meaning .label{ color:#0a2f6a; font-weight:800 }
     .meaning .value{ margin-top:6px; line-height:1.6 }
     .muted{ color:var(--muted) }
+
+    /* Modal ซื้อธูป */
+    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.5); backdrop-filter: blur(4px); z-index:50;}
+    .modal.show{display:flex}
+    .card{width:min(380px, 92vw); background:linear-gradient(180deg,#1b1b28 0%, #151522 100%); color:#fff;
+      border:1px solid #2a2a3a; border-radius:16px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);}
+    .card h2{margin:0 0 8px 0; font-size:1.05rem}
+    .card p{margin:4px 0 12px 0; opacity:.9}
+    .field{display:flex; gap:10px; align-items:center; margin-bottom:12px}
+    .field input{width:100px; padding:8px 10px; border-radius:10px; border:1px solid #3a3a46; background:#222233; color:#fff; font-weight:700; text-align:center}
+    .total{margin:6px 0 14px 0; font-weight:800}
+    .actions{display:flex; gap:10px; justify-content:flex-end}
+    .btn-primary{background:linear-gradient(180deg,#6d86ff 0%, #425aff 100%); border-color:#4b5cff}
+    .btn-secondary{background:linear-gradient(180deg,#343445 0%, #2a2a3a 100%); border-color:#3a3a46}
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="header">
-      <h1>จุดธูปเสี่ยงโชค</h1>
-    </div>
+    <div class="header"><h1>จุดธูปเสี่ยงโชค</h1></div>
 
     <div class="content">
-      <div class="stage" id="stage">
+      <div class="topbar">
+        <div class="credit" id="creditText">ธูปคงเหลือ: 0 ดอก</div>
+        <button class="btn btn-ghost" id="buyBtnTop">สั่งซื้อธูป</button>
+      </div>
+
+      <div class="stage">
         <!-- กระถาง -->
         <div class="censer">
-          <div class="rim"></div>
-          <div class="pot"></div>
-          <div class="hole"></div>
-          <div class="legs">
-            <div class="leg left"></div>
-            <div class="leg mid"></div>
-            <div class="leg right"></div>
-          </div>
+          <div class="rim"></div><div class="pot"></div><div class="hole"></div>
+          <div class="legs"><div class="leg left"></div><div class="leg mid"></div><div class="leg right"></div></div>
         </div>
 
         <!-- ธูป -->
@@ -214,16 +123,12 @@
           <div class="stick" id="stick">
             <div class="burned" id="burned"></div>
             <div class="coalLine" id="coal"></div>
-
             <div class="flame" id="flame" hidden></div>
             <div class="smoke" id="smoke" hidden>
               <div class="puff"></div><div class="puff"></div><div class="puff"></div><div class="puff"></div>
             </div>
-
             <div class="digits" id="digits">
-              <div class="digit" id="d1">8</div>
-              <div class="digit" id="d2">8</div>
-              <div class="digit" id="d3">8</div>
+              <div class="digit" id="d1">8</div><div class="digit" id="d2">8</div><div class="digit" id="d3">8</div>
             </div>
           </div>
         </div>
@@ -240,72 +145,103 @@
     </div>
   </div>
 
+  <!-- Modal ซื้อธูป -->
+  <div class="modal" id="buyModal" aria-modal="true" role="dialog">
+    <div class="card">
+      <h2>สั่งซื้อธูป</h2>
+      <p>ราคา <b>9</b> บาท/ดอก (จำนวนครั้งที่จุด = จำนวนที่ซื้อ)</p>
+      <div class="field">
+        <label for="qty">จำนวน</label>
+        <input type="number" id="qty" min="1" step="1" value="1" />
+      </div>
+      <div class="total" id="totalText">รวม 9 บาท</div>
+      <div class="actions">
+        <button class="btn btn-secondary" id="buyCancel">ยกเลิก</button>
+        <button class="btn btn-primary" id="buyConfirm">เพิ่มธูป (จำลอง)</button>
+      </div>
+      <p style="opacity:.7; margin-top:10px">* บนเว็บนี้เป็นการจำลองการซื้อ สำหรับเก็บเงินจริงต้องทำเป็นแอป Android และเชื่อม Google Play Billing</p>
+    </div>
+  </div>
+
   <script>
-    /* ----------------- เลือกเลขและความหมาย ----------------- */
+    /* ---------- ความหมายเลข ---------- */
+    const MEANINGS = new Map([
+      ['456','รวยเพราะความฉลาดของตัวเอง'],['654','รวยเพราะความฉลาดของตัวเอง'],['645','รวยเพราะความฉลาดของตัวเอง'],
+      ['789','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],['987','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],['878','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],
+      ['289','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],['982','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],['828','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],
+      ['563','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],['653','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],['635','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],
+      ['593','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],['953','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],['935','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],
+      ['936','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['639','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['369','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],
+      ['659','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['956','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['565','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],
+      ['624','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['246','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['462','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],
+      ['154','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['145','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['514','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],
+      ['159','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['195','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['519','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ']
+    ]);
+    const FALLBACKS = ['เป็นเลขมงคล หนุนโชคลาภ การงานราบรื่น','รับพลังบวก โอกาสใหม่ ๆ เข้ามา เงินทองไหลมาเทมา','แคล้วคลาดปลอดภัย โชคดีตลอดวัน','ผู้ใหญ่เมตตา เจรจาราบรื่น การเงินงอกงาม'];
+
+    function meaningFor(num){ return MEANINGS.get(num) || FALLBACKS[Math.floor(Math.random()*FALLBACKS.length)]; }
     function getTargetNumber(){
       const url = new URL(location.href);
       const s = (url.searchParams.get('num')||'').replace(/\D/g,'').slice(0,3);
-      if (s.length===3) return s;
-      return String(Math.floor(100 + Math.random()*900)); // สุ่ม 3 หลัก
+      return (s.length===3) ? s : String(Math.floor(100 + Math.random()*900));
     }
 
-    // ตารางความหมายที่กำหนด
-    const MEANINGS = new Map([
-      // รวยเพราะความฉลาดของตัวเอง
-      ['456','รวยเพราะความฉลาดของตัวเอง'],['654','รวยเพราะความฉลาดของตัวเอง'],['645','รวยเพราะความฉลาดของตัวเอง'],
-      // เลขมังกร งานเยอะ หมุนเงินก้อนโต
-      ['789','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],['987','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],['878','เลขมังกร งานเยอะ หมุนเงินก้อนโต'],
-      // เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด
-      ['289','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],['982','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],['828','เลขหงส์ เงินไม่ขาดมือ เฉลียวฉลาด'],
-      // มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย
-      ['563','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],['653','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],['635','มีอำนาจ มีเงินทอง ส่งเสริมค้าขาย'],
-      // มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี
-      ['593','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],['953','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],['935','มักมีชัยชนะ มีอำนาจ บารมี ค้าขายดี'],
-      // เหมาะกับการค้า เงินคล่อง มีเสน่ห์
-      ['936','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['639','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],['369','เหมาะกับการค้า เงินคล่อง มีเสน่ห์'],
-      // ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์
-      ['659','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['956','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],['565','ใจเย็น งานดี เงินดี ความรักรุ่งโรจน์'],
-      // ค้าขายดี ร่ำรวย ได้ดีเพราะปาก
-      ['624','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['246','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],['462','ค้าขายดี ร่ำรวย ได้ดีเพราะปาก'],
-      // สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน
-      ['154','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['145','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],['514','สติปัญญาดีเยี่ยม ผู้ใหญ่สนับสนุน'],
-      // ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ
-      ['159','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['195','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ'],['519','ผู้ใหญ่อุปถัมภ์ งานดี เงินดี สุขุม รอบคอบ']
-    ]);
+    /* ---------- ธูปคงเหลือ (เครดิต) ---------- */
+    const PRICE = 9; // บาท/ดอก
+    const LS_KEY = 'incenseCredits';
+    const creditText = document.getElementById('creditText');
+    const igniteBtn = document.getElementById('igniteBtn');
+    const buyBtnTop = document.getElementById('buyBtnTop');
+    const buyModal = document.getElementById('buyModal');
+    const qtyInput = document.getElementById('qty');
+    const totalText = document.getElementById('totalText');
+    const buyCancel = document.getElementById('buyCancel');
+    const buyConfirm = document.getElementById('buyConfirm');
 
-    const FALLBACKS = [
-      'เป็นเลขมงคล หนุนโชคลาภ การงานราบรื่น',
-      'รับพลังบวก โอกาสใหม่ ๆ เข้ามา เงินทองไหลมาเทมา',
-      'แคล้วคลาดปลอดภัย โชคดีตลอดวัน',
-      'เจรจาราบรื่น ผู้ใหญ่เมตตา การเงินเจริญงอกงาม',
-      'เสริมเสน่ห์ เมตตามหานิยม ค้าขายคล่อง'
-    ];
-
-    function meaningFor(num){
-      return MEANINGS.get(num) || FALLBACKS[Math.floor(Math.random()*FALLBACKS.length)];
+    function getCredits(){ return parseInt(localStorage.getItem(LS_KEY)||'0',10); }
+    function setCredits(v){ localStorage.setItem(LS_KEY, String(Math.max(0, v|0))); refreshCreditUI(); }
+    function refreshCreditUI(){
+      const c = getCredits();
+      creditText.textContent = `ธูปคงเหลือ: ${c} ดอก`;
+      igniteBtn.disabled = c <= 0 || running; // ห้ามกดถ้าหมด
     }
 
-    /* ----------------- ธูปและแอนิเมชัน ----------------- */
+    // เปิดหน้าซื้อ
+    function openBuy(){ qtyInput.value = '1'; totalText.textContent = `รวม ${PRICE} บาท`; buyModal.classList.add('show'); }
+    function closeBuy(){ buyModal.classList.remove('show'); }
+
+    qtyInput.addEventListener('input', ()=>{
+      const q = Math.max(1, parseInt(qtyInput.value||'1', 10));
+      qtyInput.value = String(q);
+      totalText.textContent = `รวม ${q*PRICE} บาท`;
+    });
+    buyBtnTop.addEventListener('click', openBuy);
+    buyCancel.addEventListener('click', closeBuy);
+    buyConfirm.addEventListener('click', ()=>{
+      // เวอร์ชันเว็บ: จำลองการชำระ → เพิ่มเครดิต
+      const q = Math.max(1, parseInt(qtyInput.value||'1', 10));
+      setCredits(getCredits()+q);
+      closeBuy();
+      // เปิดให้จุดได้แล้วถ้าอยากลองทันที
+      refreshCreditUI();
+    });
+
+    /* ---------- แอนิเมชันไหม้ ---------- */
     const stick = document.getElementById('stick');
-    const digitsEl = document.getElementById('digits');
     const burned = document.getElementById('burned');
-    const coal = document.getElementById('coal');
     const flame = document.getElementById('flame');
     const smoke = document.getElementById('smoke');
-    const igniteBtn = document.getElementById('igniteBtn');
-    const mText = document.getElementById('meaningText');
-
     const d1 = document.getElementById('d1'), d2 = document.getElementById('d2'), d3 = document.getElementById('d3');
+    const meaningText = document.getElementById('meaningText');
 
     let num = getTargetNumber();
     [d1.textContent, d2.textContent, d3.textContent] = num.split('');
 
     let startTime = null, rafId = null, running = false;
-    const BURN_DURATION = 60_000; // 60 วินาที
+    const BURN_DURATION = 60_000;
 
     function setDynamicSizes(){
-      const r = stick.getBoundingClientRect();
-      const w = r.width;
+      const w = stick.getBoundingClientRect().width;
       const flameH = Math.max(18, Math.min(30, w * 0.85));
       const flameW = Math.max(14, Math.min(26, w * 0.6));
       const coalT  = Math.max(4, Math.min(8,  Math.round(w * 0.22)));
@@ -313,7 +249,6 @@
       document.documentElement.style.setProperty('--flameWpx', flameW + 'px');
       document.documentElement.style.setProperty('--coalTpx',  coalT + 'px');
     }
-
     function layoutVars(progress){
       const H = stick.getBoundingClientRect().height;
       const burnYpx = Math.min(H - 2, Math.max(0, H * progress));
@@ -321,37 +256,38 @@
       document.documentElement.style.setProperty('--burnYpx', burnYpx + 'px');
       document.documentElement.style.setProperty('--revealH', revealH + '%');
     }
-
     function step(ts){
       if (!startTime) startTime = ts;
       const t = Math.min(1, (ts - startTime) / BURN_DURATION);
-
       layoutVars(t);
       flame.hidden = smoke.hidden = !(t > 0 && t < 1);
       burned.style.height = getComputedStyle(document.documentElement).getPropertyValue('--burnYpx');
-
-      if (t < 1){
-        rafId = requestAnimationFrame(step);
-      } else {
+      if (t < 1){ rafId = requestAnimationFrame(step); }
+      else {
         running = false;
-        igniteBtn.disabled = false;
-        igniteBtn.textContent = 'จุดใหม่อีกครั้ง';
+        igniteBtn.textContent = 'เริ่มจุดธูป';
         // แสดงความหมาย
-        const txt = meaningFor(num);
-        mText.textContent = `${num} → ${txt}`;
+        meaningText.textContent = `${num} → ${meaningFor(num)}`;
+        // ถ้าเครดิตหมด ให้เปิดหน้าซื้อบังคับ
+        if (getCredits() <= 0){ openBuy(); }
+        refreshCreditUI();
       }
     }
 
     function ignite(){
       if (running) return;
-      running = true;
-      igniteBtn.disabled = true;
-      igniteBtn.textContent = 'กำลังจุด...';
-      startTime = null;
-      // รีเซ็ตสภาพ
-      mText.innerHTML = '<span class="muted">..............................................................</span>';
+      // บังคับมีเครดิตก่อนเริ่ม
+      if (getCredits() <= 0){ openBuy(); return; }
+
+      // หัก 1 ดอกทันที
+      setCredits(getCredits() - 1);
+
+      running = true; startTime = null; igniteBtn.textContent = 'กำลังจุด...'; igniteBtn.disabled = true;
+      // reset view
+      meaningText.innerHTML = '<span class="muted">..............................................................</span>';
       burned.style.height = '0px'; flame.hidden = true; smoke.hidden = true;
-      // สุ่มเลขใหม่หากไม่ได้ล็อกผ่าน URL
+
+      // สุ่มเลขใหม่หากไม่ล็อกผ่าน URL
       const url = new URL(location.href);
       if (!url.searchParams.get('num')) {
         num = getTargetNumber();
@@ -367,10 +303,12 @@
     }
     window.addEventListener('resize', onResize);
     onResize(); layoutVars(0);
-
     igniteBtn.addEventListener('click', ignite);
 
-    // Service Worker (PWA)
+    // init credits UI
+    refreshCreditUI();
+
+    // Service Worker
     if ('serviceWorker' in navigator){
       window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
     }
